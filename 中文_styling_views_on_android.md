@@ -8,12 +8,19 @@
 
 *Styles are hard to get right on Android. There's a lot of potential for frustration. The hierarchy easily devolves into spaghetti code. How often have you wanted to change a style but feared you might break something unintentionally by doing so?*
 
+**在Android上，很难正确的使用Styles。这里有很多潜在的挫折。层次结构很容易陷入“意大利面式代码（无头绪代码、形容代码很难读懂）。多久了，你想修改style，但又畏惧担心弄错了某些东西？”**
+
 *After many years of working with Android, I have some rather strong opinions on how best to work with styles. How to work with them without driving myself crazy. A series of rules that helps me hold onto my sanity.*
+
+**经过几年的android工作经验，我在如何更好的使用styles方面有了一些相当健壮的建议。如何使用它们没把我逼疯了。通过一系列的规则，帮助我么年保持理智。**
 
 *This post deals with styling Views, so keep that in mind. Theming, even though it uses the same data structure, is an entirely different beast. While I may write about it someday, I have not yet convinced myself that there is a way to work with themes without going crazy.*
 
+**这篇文章涉及的样式观点,所以记住这一点：Theming,尽管使用相同的数据结构，但它是另一个完全不同的野兽。虽然我可能总有一天要写它，可我还没有说服自己，有一种方法可以使用主题而不疯。**
+
 *Buckle up. This is a long post.*
 
+**系好安全带，这是一篇很长的文章。**
 
 
 ##When to use Styles
