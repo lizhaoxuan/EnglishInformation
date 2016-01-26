@@ -42,7 +42,9 @@
 
 **自定义View。复写 *onDraw()* 方法以创建一个自定义View，绘制过程过遗漏了一些android过度绘制优化，诸如不画那些完全被遮住的组件。推荐使用 *canvas.clipRect()* 在指定区域自定义绘制，同样，如果超出了被裁剪的矩形范围，*quickReject()* 就应当决定被使用。当它不是必然的时候，避免花费过多的时间绘制。**
 
-Memory Churn. Repeatedly allocating memory for lots of small memory objects which later are discarded forces the garbage collector to intervene multiple times, taking time from the 16ms window and possibly leading to frame dropping. Using the Android Studio Memory Monitor one can visualize GC activity and determine if there is too much garbage collection. The Allocation Tracker can then be used to determine where the memory objects are coming from. Fixing the related code may involve avoiding some memory allocations or moving them outside loops. Also, objects should not be allocated inside onDraw() because the method is called many times a second. When the application really needs a larger number of objects that are discarded shortly after, it is recommended to use a pool of objects that are created once and reused, thus avoiding the GC.
+*Memory Churn. Repeatedly allocating memory for lots of small memory objects which later are discarded forces the garbage collector to intervene multiple times, taking time from the 16ms window and possibly leading to frame dropping. Using the Android Studio Memory Monitor one can visualize GC activity and determine if there is too much garbage collection. The Allocation Tracker can then be used to determine where the memory objects are coming from. Fixing the related code may involve avoiding some memory allocations or moving them outside loops. Also, objects should not be allocated inside onDraw() because the method is called many times a second. When the application really needs a larger number of objects that are discarded shortly after, it is recommended to use a pool of objects that are created once and reused, thus avoiding the GC.*
+
+**内存波动。垃圾回收器将多次干预哪些连续分配大量的小内存，之后又被丢弃的对象，这将消耗界面的16ms，并可能导致帧率下降。使用Android studio 内存监控工具可以形象的看到GC活动和确定是否有过多的垃圾回收操作。工具 Allocation Tracker（分配跟踪器） 可以确定内存对象是来自哪里。定位关联代码可以避免潜在的内存分配或者移到循环外。并且，不应该在 *onDraw* 方法中分配内存对象，因为这个方法可能将会被调用多次，如果应用真的需要大量不久就将被销毁的对象，推荐使用只需创建一次之后可以重用的对象池，从而避免GC。**
 
 Memory Leaks. Memory leaks make GC take longer to complete which may impact the frame rate. To make sure an Android activity does not leak memory after the user leaves it, McAnlis recommends creating a blank activity with no or very little memory consumption, transition to it and force a garbage collection. Investigate memory consumption with the Heap and the Allocation Tracker tools in Android Studio before and after the transition to find out if the activity leaks memory or not.
 
@@ -50,4 +52,12 @@ Battery Consumption. According to a Purdue and Microsoft research paper (PDF), a
 
 Battery consumption can be addressed by deferring some CPU intensive operations for a time when the device is connected to the charger, connected to WiFi or to combine multiple jobs in one device wake up. This can be done with the JobScheduler API which enables deferring some jobs to a later time. It is also recommended to perform network connections with care because after sending a network request and receiving a response, the device is kept awake for at least another 5 seconds just in case another data packet arrives from the server.
 
-McAnlis also suggests using the consumption details offered by Settings|Battery and the Battery Historian tool to monitor how an app consumes battery over time.
+*McAnlis also suggests using the consumption details offered by Settings|Battery and the Battery Historian tool to monitor how an app consumes battery over time.*
+
+**McAnlis 还建议使用提供消耗细节的电量审查工具（Battery Historian）来监控你的APP如何使用电池**
+
+**最后推荐我的另外两篇文章 [Android性能编码规范](https://github.com/lizhaoxuan/Android-performance-norm) and [Android性能优化工具](https://github.com/lizhaoxuan/Android-performance-tool)**
+
+
+
+
