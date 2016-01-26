@@ -5,6 +5,10 @@
 ##Android性能模式
 ===========
 
+本文的翻译初衷是，虽然网络现有的翻译资料翻译的更好更直白明了，但是在读过英文原版后，你还是会发现一些新的东西，新的理解！
+
+=====================
+
 *The Google Developers YouTube channel has posted a set of 16 videos on Android Performance Patterns outlining a number of performance issues developers stumble across when creating applications for Android, along with advice on dealing with them which we will present in summary.*
 
 **Googole 开发者YouTube频道 发布了一组16个视频讲述Android性能模式，列述一些开发者们在开发Android应用时困惑的性能问题，以及在总结中呈现了如何处理这些问题的建议。**
@@ -44,9 +48,13 @@
 
 *Memory Churn. Repeatedly allocating memory for lots of small memory objects which later are discarded forces the garbage collector to intervene multiple times, taking time from the 16ms window and possibly leading to frame dropping. Using the Android Studio Memory Monitor one can visualize GC activity and determine if there is too much garbage collection. The Allocation Tracker can then be used to determine where the memory objects are coming from. Fixing the related code may involve avoiding some memory allocations or moving them outside loops. Also, objects should not be allocated inside onDraw() because the method is called many times a second. When the application really needs a larger number of objects that are discarded shortly after, it is recommended to use a pool of objects that are created once and reused, thus avoiding the GC.*
 
-**内存波动。垃圾回收器将多次干预哪些连续分配大量的小内存，之后又被丢弃的对象，这将消耗界面的16ms，并可能导致帧率下降。使用Android studio 内存监控工具可以形象的看到GC活动和确定是否有过多的垃圾回收操作。工具 Allocation Tracker（分配跟踪器） 可以确定内存对象是来自哪里。定位关联代码可以避免潜在的内存分配或者移到循环外。并且，不应该在 *onDraw* 方法中分配内存对象，因为这个方法可能将会被调用多次，如果应用真的需要大量不久就将被销毁的对象，推荐使用只需创建一次之后可以重用的对象池，从而避免GC。**
+**内存波动。垃圾回收器将多次干预哪些大量创建又在短时间内马上被释放的对象，这将消耗界面的16ms，并可能导致帧率下降。使用Android studio 内存监控工具可以形象的看到GC活动和确定是否有过多的垃圾回收操作。工具 Allocation Tracker（分配跟踪器） 可以确定内存对象是来自哪里。定位关联代码可以避免潜在的内存分配或者移到循环外。并且，不应该在 *onDraw* 方法中分配内存对象，因为这个方法可能将会被调用多次，如果应用真的需要大量不久就将被销毁的对象，推荐使用只需创建一次之后可以重用的对象池，从而避免GC。**
 
-Memory Leaks. Memory leaks make GC take longer to complete which may impact the frame rate. To make sure an Android activity does not leak memory after the user leaves it, McAnlis recommends creating a blank activity with no or very little memory consumption, transition to it and force a garbage collection. Investigate memory consumption with the Heap and the Allocation Tracker tools in Android Studio before and after the transition to find out if the activity leaks memory or not.
+*Memory Leaks. Memory leaks make GC take longer to complete which may impact the frame rate. To make sure an Android activity does not leak memory after the user leaves it, McAnlis recommends creating a blank activity with no or very little memory consumption, transition to it and force a garbage collection. Investigate memory consumption with the Heap and the Allocation Tracker tools in Android Studio before and after the transition to find out if the activity leaks memory or not.*
+
+**内存泄露。内存泄露使得GC话费更长的时间，这有可能影响帧率。确保一个不在使用的Activity不会引起内存泄露。McAnlis推荐创建一个不消耗或消耗很少内存空的Activity，跳转它并手动执行GC方法。在Android Studio里的工具Heap and the Allocation Tracker tools 上研究跳转前后的内存消耗，找出activity是否发生了内存泄露。**
+
+*（内存泄漏指的是那些程序不再使 的对象 法被GC识别,这样就导致这个对象 直留在内存当中,占 了宝贵 的内存空间。）*
 
 Battery Consumption. According to a Purdue and Microsoft research paper (PDF), about 70% of the battery consumption of several high profile apps went to third party advertising modules which performed data analytics, location discovery and advertisement downloads. Only 30% of the battery went to the actual activity of the application. Google advises developers to be careful with battery consumption because this is on top of users’ concerns list. Top recommendation is avoiding waking a device from sleep unless absolutely necessary. If it has to be awaken, it is recommended using WakeLock with a timeout to make sure the device goes back to sleep in case something went wrong with the app. Another idea is to use AlarmManager.setInexactRepeating() to combine the wake up with another activity to save battery.
 
