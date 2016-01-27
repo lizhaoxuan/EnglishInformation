@@ -3,7 +3,7 @@
 
 ##Android Performance Patterns
 
-android性能优化的总结篇 ，原文链接找不到了……
+
 
 ===========
 
