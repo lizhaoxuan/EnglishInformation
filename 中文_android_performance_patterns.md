@@ -2,7 +2,7 @@
 2015年8月22日
 
 ##Android Performance Patterns
-##Android性能模式
+##Android性能典范
 ===========
 
 本文的翻译初衷是，虽然网络现有的翻译资料翻译的更好更直白明了，但是在读过英文原版后，你还是会发现一些新的东西，新的理解！
@@ -11,7 +11,7 @@
 
 *The Google Developers YouTube channel has posted a set of 16 videos on Android Performance Patterns outlining a number of performance issues developers stumble across when creating applications for Android, along with advice on dealing with them which we will present in summary.*
 
-**Googole 开发者YouTube频道 发布了一组16个视频讲述Android性能模式，列述一些开发者们在开发Android应用时困惑的性能问题，以及在总结中呈现了如何处理这些问题的建议。**
+**Googole 开发者YouTube频道 发布了一组16个视频讲述Android性能典范，列述一些开发者们在开发Android应用时困惑的性能问题，以及在总结中呈现了如何处理这些问题的建议。**
 
 *Rendering Performance 101. According to Colt McAnlis, presenter of the video series, improper rendering is the source of most performance issues on Android. If an activity needs more than 16ms to prepare the rendering of the next frame on the screen the system will drop the respective frame displaying instead the previous one. When frames are dropped the user may have an unpleasant experience using the application noticing scrolling that is not smooth or laggy transitions.*
 

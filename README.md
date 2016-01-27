@@ -1,15 +1,15 @@
 # EnglishInformation
 外文资料翻译
 
-- Android Performance Patterns Android 性能模式
+- Android Performance Patterns (Android 性能典范)
 
-	- Englisg_android_performance_patterns
-	- 中文_android_performance_patterns
+	- [Englisg_android_performance_patterns](https://github.com/lizhaoxuan/EnglishInformation/blob/master/Englisg_android_performance_patterns.md)
+	- [中文_android_performance_patterns](https://github.com/lizhaoxuan/EnglishInformation/blob/master/中文_android_performance_patterns.md)
 
 - Styling Views on Android
 
-	- Englis_styling_views_on_android		
-	- 中文_styling_views_on_android
+	- [Englis_styling_views_on_android](https://github.com/lizhaoxuan/EnglishInformation/blob/master/Englis_styling_views_on_android.md)		
+	- [中文_styling_views_on_android](https://github.com/lizhaoxuan/EnglishInformation/blob/master/中文_styling_views_on_android.md)
 	
 	
 	
