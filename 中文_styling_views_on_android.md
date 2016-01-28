@@ -24,18 +24,34 @@
 
 
 ##When to use Styles
+##什么时候使用Styles
 
 *The first problem we must address is a simple one: when should you use a style instead of inline attributes?*
 
+**第一个我们必须要提出的问题很简单：什么时候该使用style而不是内嵌属性？**
+
 ***Rule #1: Use styles when multiple Views are semantically identical.***
+
+**规则 #1：当有许多相同的View时使用style**
+
 
 *This rule is best illustrated with a few examples:*
 
-- You're creating a calculator. Each button should look the same, so it makes sense to create a CalculatorButton style.
+**下面几个例子是这条规则的最好说明**
 
-- You've got a couple screens with multiple text formats - say, headers, subheaders, and text. You can unify their look by creating Header, Subheader and Text styles.
+- *You're creating a calculator. Each button should look the same, so it makes sense to create a CalculatorButton style.*
 
-- You've got thumbnails all over your app. You want them all to look the same. The Thumbnail style is born.
+- **你创建一个计算器。每一个按钮都要看起来一样，因此创建一个CalculatorButton style 是有意义的。**
+
+
+- *You've got a couple screens with multiple text formats - say, headers, subheaders, and text. You can unify their look by creating Header, Subheader and Text styles.*
+
+**假设你有多个屏幕和多种文字格式，标题，小标题，和文字。你可以用styles统一他们的外观。**
+
+- *You've got thumbnails all over your app. You want them all to look the same. The Thumbnail style is born.*
+
+**缩略图遍布你的app，你希望他们看起来都一样，Thumbnail style产生了。**
+
 
 *The common thread in all these examples is that these Views are not just using the same attributes - **they play the same role across the app.** Now, when you want to tweak the look/feel of any of these Views, you can just edit the style and change them all at once. It saves you time, effort and keeps your Views consistent.*
 
@@ -43,6 +59,8 @@
 
 
 *Want to save even more work? Use resource references!*
+
+**想节省更多事情？使用资源引用**
 
 ***Rule #2: Use references within styles when appropriate.*
 **
