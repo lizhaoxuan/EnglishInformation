@@ -65,7 +65,12 @@
 ***Rule #2: Use references within styles when appropriate.*
 **
 
+规则 #2 在恰当的时候在styles内部使用 references
+
+
 You could define a style this way:
+
+你习惯这样定义style:
 
 	<style name="MyButton">
     	<item name="android:minWidth">88dp</item>
@@ -74,18 +79,28 @@ You could define a style this way:
 	
 *What if you wanted minWidth to vary based on screen size? You could just duplicate the style once per screen size (say, sw600dp and sw900dp), but then you're having to duplicate the minHeight attribute as well. What if you want both attributes to change? Suddenly you've got tons of MyButtons defined everywhere, each one duplicating all other attributes. It's a recipe for disaster; it's so easy to forget to change one attribute in one of the many copies.*
 
+**你想要minWidth根据屏幕大小而变化吗？你可以复制style到不同大小的屏幕（比如：sw600dp and sw900dp），但你不得不重复minHeight属性.如果你想要改变这两个属性呢？忽然，你定义了大量的MyButtons在很多地方，每一个都在重复所有的属性，这是一个灾难。很容易忘记改变一个属性的多个副本。**
+
 *Styles are just an alias to a series of attributes. It's a lot easier to just define the style like this:*
+
+**风格是一系列属性的别名。更简单的定义style如下**
 
 	<style name="MyButton">
     	<item name="android:minWidth">@dimen/button_min_width</item>
     	<item name="android:minHeight">@dimen/button_min_height</item>
 	</style>
 	
-*Now you can just modify a single attribute for each resource qualifier. It's absurd to think about duplicating a layout just to change, say, the width of one View in portrait vs. landscape. You'd use a dimension for that. The same applies for styles.*
+*Now you can just modify a single attribute for each resource qualifier. It's absurd to think about duplicating a layout just to change, say, the width of one View in portrait vs landscape. You'd use a dimension for that. The same applies for styles.*
+
+**现在你只需要修改一个属性，就能实现到每一个资源限定符上。一个荒谬的想法是，复制一个布局仅仅只是为了应对改变，比如：在一个view在横竖屏情况下的宽度，你可以在这上面使用使用dimension，而这同样适用于styles**
 
 *I don't mean to imply you should always use resource references in styles; just that you should use it if you need multiple values switched on resource qualifiers.*
 
+**我并没有暗示你应该任何时候都在styles上使用资源引用。只是如果你需要多个重复的值是时候才使用资源限定符**
+
 *This isn't to say that sometimes you won't need to duplicate a style across resource qualifiers, but you can keep it to a minimum. Usually the only reason to do so is because of platform changes (e.g., the change from paddingLeft and paddingRight to paddingStart and paddingEnd).*
+
+This isn't to say that sometimes you won't need to duplicate a style across resource qualifiers,但是你可以把它降到最低。通常这么做的唯一原因是平台的变化。
 
 
 ##Multiple Styles
