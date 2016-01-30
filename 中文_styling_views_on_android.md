@@ -104,12 +104,19 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 
 
 ##Multiple Styles
+##多种风格
 
 *It would be wonderful if you could apply multiple styles to a single View, like CSS.*
 
+**如果你可以在一个View上应用多个styles,那将是极好的。就像CSS**
+
 *You can't. Sorry.*
 
+**抱歉，你不能这么做.**
+
 *But you can, in a couple of cases, get an approximation of multiple styles.*
+
+**但是在某些情况下，你可以实现类似多重styles。**
 
 ***Rule #3: Use themes to tweak default styles.*
 **
