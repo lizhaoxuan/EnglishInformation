@@ -118,23 +118,32 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 
 **但是在某些情况下，你可以实现类似多重styles。**
 
-***Rule #3: Use themes to tweak default styles.*
-**
+***Rule #3: Use themes to tweak default styles.***
+
+**规则3：使用themes 改进默认的styles**
 
 ***Themes provide ways of defining the default style of many standard widgets. For example, if you want to define the default button for the app, you could do this:***
 
+**主题提供的方法定义了许多实现默认style的标准控件，例如，如果你想定义默认的按钮在你的应用里，你可以使用这个：**
 
 	<style name="MyTheme">
     	<item name="android:buttonStyle">@style/MyButton</item>
 	</style>
 	
+
 *If you're just tweaking the default style, the only tricky part is figuring out the parent of your style; you want it to match the appropriate theme for the device, but that varies based on OS version.*
 
+**如果你只是想调整默认style,唯一需要注意的是弄清楚父style;你希望它可以匹配适合的theme到设备，然而它的不同是基于系统版本。**
+
 *If you're using an AppCompat theme, you should use their styles as the parent since they handle differences across platforms as well. For example, they have a Spinner style:*
+
+**如果你使用AppCompat theme,你应该定义自己的style,并继承它，因为它是用来处理跨平台的。例如，它们有Spinner style:**
 
 	<style name="MySpinner" parent="Widget.AppCompat.Spinner" />
 	
 *If the style doesn't exist in AppCompat (or you're not using it), the problem is a bit trickier, since you need the parent to switch based on the theme. Here's an example of a custom Button style that uses Holo normally, but Material when appropriate.*
+
+**如果style不存在于AppCompat（或者你没有使用），那这个问题有点棘手，因为你需要父theme来切换。这是一个自定义的按钮style,使用Holo正常，但 Material 只在适当时候才行。（这句话翻译的太难受，肯定有问题）**
 
 *You'd put this in* 		**/values/values.xml:**
 
@@ -150,7 +159,11 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 	
 *Setting up the correct parent will ensure consistency with both your app and the platform.*
 
+设置正确的父 theme,将确保平台与应用的程序的一致性。
+
 *If you truly want to define all necessary attributes (instead of just tweaking the defaults), you could skip parenting entirely.*
+
+如果你真的想定义所有必要的属性（而不是调整默认值）,你完全可以跳过继承。
 
 **Rule #4: Use text appearance when possible.**
 
