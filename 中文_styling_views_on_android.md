@@ -159,17 +159,23 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 	
 *Setting up the correct parent will ensure consistency with both your app and the platform.*
 
-设置正确的父 theme,将确保平台与应用的程序的一致性。
+**设置正确的父 theme,将确保平台与应用的程序的一致性。**
 
 *If you truly want to define all necessary attributes (instead of just tweaking the defaults), you could skip parenting entirely.*
 
-如果你真的想定义所有必要的属性（而不是调整默认值）,你完全可以跳过继承。
+**如果你真的想定义所有必要的属性（而不是调整默认值）,你完全可以跳过继承。**
 
 **Rule #4: Use text appearance when possible.**
 
+**规则4：在合适的时候使用TextAppearance**
+
 *TextAppearance allows you to merge two styles for some of the most commonly modified text attributes. Take a look at all your styles: how many of them only modify how the text looks? In those cases, you could instead just modify the TextAppearance.*
 
+**TextAppearance允许你合并两种style的一些相同文本属性的修改。看看你所有的style:他们当中有多少只是修改文本的外观？在这种情况，你可以只修改TextAppearance**
+
 *First, you need to define your TextAppearance:*
+
+**首先，你需要定义你的TextAppearance**
 
 	<style name="MyTextAppearance" parent="TextAppearance.AppCompat">
     	<item name="android:textColor">#0F0</item>
@@ -178,7 +184,11 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 	
 *Notice how I've set a parent - text appearances won't merge, so you need to make sure to define all attributes. You can use any appropriate TextAppearance as the parent.*
 
+**注意我是如何设置父类的，text appearances 并没有合并，所以你需要去定义所有属性。你可以使用任何合适的TextAppearance作为父类。**
+
 *Now you can use it in a TextView:*
+
+**现在你可以使用它到TextView上来：**
 
 	<TextView
     	style="@style/MyStyle"
@@ -188,7 +198,11 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
     	
 *Notice that I can still apply a style to this TextView, getting me a whopping TWO styles for one view! Not as good as true multiple styles, but I'll take what I can get.*
 
+**注意，我任然可以应用style到这个TextView,让我可以在一个View上应用两个style.没有真正的多重style，但我任然可以通过这种方式实现.**
+
 *You can use TextAppearance in any class that extends TextView. That means that EditText, Button, etc. all support text styling.*
+
+**你可以使用TextAppearance在一些继承了TextView的类上，这意味着EditText，Button等所有支持文本样式的控件都可以。**
 
 ## Common Pitfalls
 
