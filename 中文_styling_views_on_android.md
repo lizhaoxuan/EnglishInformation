@@ -206,17 +206,29 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 
 ## Common Pitfalls
 
+##常见缺点
+
 *I've explained all the times when I use styles. Unfortunately, it is easy to abuse styles in ways that will hurt you in the long run. Here's a few anti-patterns to avoid.*
+
+**每当我使用styles的时候我都在不停的解释。然而不幸的是，大家依然会轻易的滥用风格，这将会伤害到你。下面是一些应该避免的“反模式”（反模式：常见的糟糕实践方式，让你看似解决了一些问题，但最终却得不偿失的模式）**
 
 **Rule #5: Do NOT create a style if it's only going to be used once.**
 
+**规则5：如果仅是在一个地方使用就不要去创建style.**
+
 *Styles are an extra layer of abstraction. It adds complexity. You have to lookup the style to see the attributes they apply. As such, I see no reason to use them unless you're going to use the style in multiple places.*
 
+**style是一个额外的抽象层。它增加了复杂性。你必须去查找这个style从而看它应用了哪些属性，从这个角度看，我认为你没有必要去使用它，除非你在很多地方使用了这个style.**
+
 *Which would you rather see when you open up a layout: This?*
+
+**当你打开布局文件，你愿意看到这个？**
 
 	<TextView style="HelloWorldTextView" />
 	
 *Or this?*
+
+**或是这个？**
 
 	<TextView
     	android:layout_width="wrap_content"
@@ -225,20 +237,36 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
     	
 *It's so easy to create a style later if you need to do so. Don't plan ahead too much.*
 
+**如果需要一个style,创建它很容易。没有必要提前太多。**
+
 ================
 
 **Rule #6: DO NOT create a style just because multiple Views use the same attributes.
 **
 
+**规则 6 ：不要因为多个View使用了相同的属性而创建style.**
+
 *The main reason to use styles is to reduce the number of repeated attributes, right? Why not just use a style whenever multiple Views use the same attributes?*
+
+**使用样式的主要原因是减少重复的属性，对吧？为什么不在多个View使用相同的属性时使用style?**
+
 
 *The problem with this attitude is that those Views, if they are not used in the same context, may eventually want to differ in how they look. And at that point, your base style becomes difficult to edit without unintended side effects.*
 
+**这种态度的问题是：如果他们不是使用在相同的上下文中，最终可能想让他们看起不相同，在那个时候，你的base style就很难编辑，且很容易引起以外的副作用。**
+
+
 *Think about this scenario: you've got a few TextViews that the same text appearance and background. You think, "hey, I'll create a style, that'll cut down on code duplication." Everything is hunky dory at first, but eventually you want to tweak how some of the TextViews look. The problem is, **by now that style is used all over the place, so you can't edit it without some collateral damage.***
+
+**想想这个场景：你有几个TextView,有着相同的text appearance 和 background。你想：“hey,我要创建一个style,这样会减少代码的重复。”，所有的一片大好，但是最终你想调整几个TextView看看，这个问题是：现在到处都在使用这个风格，所以你不能在没有附带损害的情况下编辑它。**
 
 *Fine, you say - I'll just override the style directly in the layout XML. Problem solved. Then it happens again. And again. Eventually that style is meaningless because you're having to override it everywhere. It ends up adding extra work instead of making life easier.*
 
+**好，你说：我就直接在xml布局文件里直接重写。问题解决了，然后问题一次又一次的发生。最终，style变成没有意义的，因为你必须重写无处不在的它。最终反而增加了工作量，而不是让你更轻松。**
+
 *That's why I specified in rule #1 that you should use styles when the Views are semantically identical. This ensures that when you change a style, you really do want every View using the style to change.*
+
+**这就是我为什么在规则1中说。你应该在View有相同含义的时候使用它。这可以保证当你在改变style时，真的是希望每个View的style都在变化。**
 
 ##Implicit vs. Explicit Parenting
 
