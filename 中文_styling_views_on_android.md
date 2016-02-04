@@ -269,12 +269,20 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 **这就是我为什么在规则1中说。你应该在View有相同含义的时候使用它。这可以保证当你在改变style时，真的是希望每个View的style都在变化。**
 
 ##Implicit vs. Explicit Parenting
+##隐式和显式继承
 
 *Styles support parenting, wherein a child style adopts all attributes of a parent style. It would be rather limiting if they did not.*
 
+**style支持继承，子style继承了父style的所有属性。如果没有继承的话，将会有很大的限制。**
+
+
 *Suppose I want every Button in the app to look the same, so I make a ButtonStyle. Later, I decide half the Buttons should look slightly different - with parenting, I can just create ButtonStyle.Different, getting the base style + the tweaks.*
 
+**假设我想要所有的按钮在应用里看起来都一样，所以我创建额ButtomStyle。之后，我决定让一半的按钮看起来和之前的稍微有些不同，我可以立刻创建一个ButtonStyle.Different，得到base style 再加一些调整。**
+
 *It turns out there are two ways of defining parents, implicitly and explicitly:*
+
+**有两种方式继承，显示和隐式：**
 
 	<!-- Our parent style -->
 	<style name="Parent" />
@@ -287,44 +295,70 @@ This isn't to say that sometimes you won't need to duplicate a style across reso
 	
 *Simple enough, right? But what do you think happens here, when we define parents with both methods?*
 
+**足够简单，对吧？但是当我这里定义两种方式，你觉得会发生什么？**
+
 	<style name="Parent.Child" parent="AnotherParent" />
 	
 *If you answered that the style has two parents, you are wrong. It turns out that it only has one parent: AnotherParent.*
 
+**如果你回答这个style，有两个父类，那你错了，这个style只有一个父类：AnotherParent。**
+
 ***Each style can only have one parent, even though there are two ways to define it.** The explicit parent (using the attribute) takes precedence. This leads me to the next rule:*
 
+**每个style只能有一个父类，尽管它有两种定义方式。明确的继承方式（使用属性）优先，这是我的下一条规则：
+**
+
 **Rule #7: DO NOT mix implicit and explicit parenting.**
+**不要混合显示和隐式继承**
+
 
 *Mixing the two is a recipe for confusion. Suppose I have this layout:*
+
+**混合这两个会引起混乱，假设我有这样一个布局**
 
 	<Button
     	style="@style/MyWidgets.Button.Awesome"
     	android:layout_width="match_parent"
     	android:layout_height="match_parent" />
-    	
+    	    	
 *But it turns out that my style is defined thus:*
+
+**但事实上，我的style是这样定义的：**
 
 	<style name="MyWidgets.Button.Awesome" parent="SomethingElse" />
 	
 *Even though it looks like my Button is based on MyWidgets.Button, it's not! The style name is misleading and the only way to discover that is to do extra work and dig into your style files.*
 
+**虽然我的按钮看起来像是基于MyWidgets，但其实并不是！这个style的名字引起了误导，发现它的唯一方式就是去做额外的工作，深入style文件去查看。**
+
 *The common temptation is to keep using dot notation with explicit parenting so that your styles look hierarchically related:*
+
+**一个常见的诱惑同时保持点符号的使用和显示继承，以便是style看起来有等级关系：**
 
 	<style name="MyButton" parent="android:Widget.Holo.Button" />
 	<style name="MyButton.Borderless" 					parent="android:Widget.Holo.Button.Borderless" />
 	
 *Object-oriented styles! They look so pretty, right? But looks are all you're getting - **an illusion that styles are related when they are not**. The deception is that MyButton.Borderless is related to MyButton, but they have nothing in common! Let's remove the confusion by removing the dots from the name:*
 
+**面向对象的风格！他们看起来非常漂亮对吧？当他们并没有关系的时候给你他们有关系的幻觉。它欺骗你 MyButton.Borderless 和 MyButton是有关系的，但其实他们并没有。让我删除有点的名称来消除困惑：**
+
 	<style name="MyButton" parent="android:Widget.Holo.Button" />
 	<style name="MyBorderlessButton" parent="android:Widget.Holo.Button.Borderless" /> 
 	
 *I lose out on the hierarchy looking pretty, but I gain a lot of utility in code.*[^1]
 
+**我失去了看起来很漂亮的层次结构，但我得到了更多实用的程序代码。**
+
 ##Styles vs. Themes
 
-*Styles and themes are two different concepts. While styles apply to a single View, themes are applied to a set of Views (or to a whole Activity).
 
-For example, suppose you are using AppCompat and you want to set the primary color for the screen. For this, you must theme the entire Activity:*
+*Styles and themes are two different concepts. While styles apply to a single View, themes are applied to a set of Views (or to a whole Activity).*
+
+**style 和 theme 是两种不同的概念。style适用于单一View，themes适用于一组View或一个完整的Activity**
+
+*For example, suppose you are using AppCompat and you want to set the primary color for the screen. For this, you must theme the entire Activity:*
+
+**例如，你想适用AppCompat，同时你想设置屏幕的primary color。为此，你必须创建一个Theme给Activity:**
 
 	<style name="MyTheme">
     	<style name="colorPrimary">@color/my_primary_color</style>
@@ -332,18 +366,30 @@ For example, suppose you are using AppCompat and you want to set the primary col
 	
 *Themes use the same data structure as styles - even using the style tag - but they are, in fact, used in totally different circumstances! They don't operate on the same attributes - for example, you can define a textColor on a View, but there is no textColor attribute for a theme. Likewise, there exists colorPrimary in themes, but in styles they go unused. Thus:*
 
+**主题和style使用了相同的数据结构，甚至使用了style表现。但事实上，它们是在完全不同的场景下使用的。它们不操作相同的属性，例如：你定义一个textColor在View上，但是主题中并没有textColor，同样，Theme中存在colorPrimary，但styles并未使用。因此：**
+
 **Rule #8: DO NOT mix styles and themes.**
+
+**不要同时使用style和themes**
 
 *Two common mistakes I've seen:*
 
+**我见过两个共同的错误：**
+
 1. Applying a theme (as a style) to a View:
 
+ 	**在View上将theme当做style使用**
 
 		<View style="@android:style/Theme" />
 	
 *It just makes no sense because a View can't use any of the theme attributes anyways. Nothing happens.*
 
+**它没有任何意义，因为一个View不能使用任何Theme的属性。什么也不会发生。**
+
 2. Combining the themes/styles in your hierarchy via parenting. I've seen this as a result of people trying to maintain the illusion of hierarchy using dot notation:
+
+	**结合theme/style继承的层次结构。我看到人们尝试用点符号的方式来保持层次结构。**
+
 
 		<style name="MyTheme" />
 		<style name="MyTheme.Widget" />
@@ -351,9 +397,13 @@ For example, suppose you are using AppCompat and you want to set the primary col
 		
 *Stupid! So, stupid! It does not make any sense and sometimes misfires in strange ways. Just don't do it!*
 
+**愚蠢！非常愚蠢！它没有任何意义。不要在这样做了！**
+
 ===============
 
 *As of Lollipop, you can apply themes to a View and all its children[^2]. Even in that circumstance, you shouldn't mix up the two, though you could use them both in parallel:*
+
+自Lollipop起，你可以应用themes到一个View和它所有的子成员上，即使在这种情况下，你也不应该同时使用两种方式，虽然你可以这样做。
 
 	<View 
     	style="@style/MyView"
@@ -361,12 +411,18 @@ For example, suppose you are using AppCompat and you want to set the primary col
     	
 *AppCompat has a simulacrum of View theming for the Toolbar, but that's all you'll get for a while until Lollipop is the minimum supported version of your app. In other words - you can have fun with this feature in a couple years. :P*
 
+AppCompat has a simulacrum of View theming for the Toolbar，但你可能需要一段时间，直到Lollipop变成你应用的最低支持版本。换句话说，这个特性，你可以玩几年。
+
+
 ##Conclusion
 
 *The unifying element of these rules are to be careful and thoughtful when using styles. They can save you time, but only if you know when to use them. Haphazard application of styles will eventually lead to frustration.*
 
-Also, like all rules, they are sometimes best when broken. There will always be exceptions, so don't take this article as gospel. [^3]		
-	
+**这些规则的统一要素，是要小时周到的使用styles.它们可以节省你的时间，但只有当你直到什么时候该使用它们。随意的使用style将最终导致受挫。**
+
+*Also, like all rules, they are sometimes best when broken. There will always be exceptions, so don't take this article as gospel.* [^3]		
+
+**同样，类似所有的规则，有时打破它们才是最好的。总会有例外的情况，座椅不要以这篇文章为福音。**
 
 
 *Many thanks to Dave Smith for being my editor on this article!*
